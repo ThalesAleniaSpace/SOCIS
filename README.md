@@ -3,15 +3,11 @@
 
 ##### Scope
 
----
-
 The main goal of this project is to train, configure and deploy two deep neural network (a perceptron and a Convolutional Neural Network - (CNN)) in a portable VPU to validate its performances, behavior and integration capacity. The proof of concept will be based on pattern recognition on test results.
 
 ---
 
 ##### Duration
-
----
 
 The project will take place between June and September 2019 and it is divided in 6 sprints of 2 weeks each.
 
@@ -19,7 +15,6 @@ The project will take place between June and September 2019 and it is divided in
 
 ##### Sprints
 
----
 The sprints will be updated when the actual sprint is finished.
 * Sprint 1:
 
@@ -43,7 +38,7 @@ The sprints will be updated when the actual sprint is finished.
 
     * Transform the data (if needed) to be used in the network.
 
-* **Sprint 2**
+* **Sprint 2** -> Actual sprint
 
 * Sprint 3
 
