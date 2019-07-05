@@ -4,7 +4,7 @@ import codecs
 # from pyth.plugins.rtf15.reader import Rtf15Reader
 # from pyth.plugins.plaintext.writer import PlaintextWriter
 # create the labels of the csv [ s.no, id, date, x1, y1,...............x10000, y10000 ]
-labels = [['s.no', 'id', 'path', 'date']]
+labels = [['s.no', 'id', 'dir', 'path', 'date']]
 
 for i in range(10000):
 
@@ -14,8 +14,9 @@ for i in range(10000):
 #list of labels
 
 # print(labels)
+# labels[0] = labels[0] + ['a', 'a', 'a', 'a', 'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',]
 csvData = labels
-
+print(len(labels[0]))
 #creating a .csv and adding labels
 
 with open('points.csv', 'w') as csvFile:
@@ -78,7 +79,7 @@ for i in range(len(all_test_dir_path)):
 #////////////////////////////////extracting from the files
 
 
-def getpoints(filepath,sno):
+def getpoints(filepath,sno, dir1):
     
 
     filepath = filepath
@@ -159,13 +160,14 @@ def getpoints(filepath,sno):
         x = temp_trace[0:com_i]
         y = temp_trace[com_i+1:]
         # print(x,"---",y)
-        trace_points.append(x)
-        trace_points.append(y)
+        trace_points.append(float(x))
+        trace_points.append(float(y))
     # print(trace_points)
 
     return_list = []
     return_list.append(sno)
     return_list.append(final_filename)
+    return_list.append(dir1)
     return_list.append(final_filepath)
     return_list.append(final_filedate)
     return_list = return_list + trace_points
@@ -195,7 +197,7 @@ for i in range(len(all_files_path)):
         test = "HEGSE"
         if filename.find(test) == -1:
             sno = sno+1
-            return_list = getpoints(filepath,sno)
+            return_list = getpoints(filepath,sno,all_tests[i])
             csv_list.append(return_list)
 
 with open('points.csv', 'a') as csvFile:
