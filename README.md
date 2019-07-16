@@ -19,23 +19,14 @@ The sprints will be updated when the actual sprint is finished.
 * Sprint 1:
 
   * Technology studying and installing
-
     * Python 3.7
-
     * Tensorflow/Keras
-
     * Jupyter Notebook
-
     * Docker
-
   * Input data analysis
-
     * Analysis of input data
-
     * Understanding of the data and its categorization
-
     * Plan how the data will be used
-
     * Transform the data (if needed) to be used in the network.
 
 * Sprint 2:
