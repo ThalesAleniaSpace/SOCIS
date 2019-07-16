@@ -38,9 +38,18 @@ The sprints will be updated when the actual sprint is finished.
 
     * Transform the data (if needed) to be used in the network.
 
-* **Sprint 2** -> Actual sprint
+* Sprint 2:
+  * Implementation of perceptron
+    * 4 point solution (ON Graphs)
+    * 4 point solution (OFF Graphs)
+    * Reduction of points solution (ON graphs)
+    * Reduction of points solution (ON graphs)
+  * Analyze and optimize the networks
+    * Analyze the 2 different solutions
+    * Trade off
+    * Optimize topology and parameters
 
-* Sprint 3
+* **Sprint 3** -> Actual sprint
 
 * Sprint 4
 
