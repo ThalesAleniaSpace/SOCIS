@@ -1,0 +1,447 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
+<div  align='center'>
+  <h1 >Portable AI solutions for test results analysis </h1>
+
+</div>
+<br>
+
+
+
+
+
+<div align='center'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+<script type="text/javascript">
+            var socket;
+            var val_1 = "--";
+            var val_2 = 0.0;
+            var val_3 = 0.0;
+            var val_4 = 0.0;
+            var spec_1 ="" ;
+            var spec_2 =0.0 ;
+            var spec_3 =0.0;
+            var spec_4=0.0 ;
+            var c_1 ="";
+            var c_2 ="";
+            var c_3 = "";
+            var c_4 ="";
+            var fid="";
+            
+
+            socket = io.connect('http://0.0.0.0:5000');
+
+            function set(){
+              socket.emit('Evaluate')
+            }
+            $(document).ready(function() {
+               
+                // console.log("hfgjhgbjhdfg")
+
+            // 
+
+
+            // $('#eval').on('click', function() {
+            //   socket.emit('X')
+              
+            // socket.emit('Evaluate')
+            // });
+
+                  //edited Divija.p
+                  $("#pred").click(function(){
+
+                                          var i =-1
+                                          $('#tab_logic tr').each(function() {
+                                            i++;
+
+                                            if(i==2)
+                                            {
+                                             spec_1 = $(this).find(".keyvalue input").val();
+                                            // console.log(spec_1);
+                                            }
+                                            if(i==3)
+                                            {
+                                             spec_2 = $(this).find(".keyvalue input").val();
+                                            // console.log(spec_2);
+                                            }
+                                            if(i==4)
+                                            {
+                                             spec_3 = $(this).find(".keyvalue input").val();
+                                            // console.log(spec_3);
+                                            }
+                                            if(i==5)
+                                            {
+                                            spec_4 = $(this).find(".keyvalue input").val();
+                                            // console.log(spec_4);
+                                            }
+                                          });
+                                          console.log(typeof spec_1);
+                                          console.log(typeof spec_2);
+                                          console.log(spec_3);
+                                          console.log(spec_4);
+
+                                          if(val_1== spec_1)
+                                          {
+                                            c_1 ="C";
+                                          }
+                                          else{
+                                            c_1="NC";
+                                          }
+                                           
+                                if(val_1 == "ON")
+                                           {
+                                             if (val_2<=parseFloat(spec_2))
+                                             {
+                                               c_2 = "C"
+                                             }
+                                             else
+                                             {
+                                               c_2="NC"
+                                             }
+
+                                             if (val_3<=parseFloat(spec_3))
+                                             {
+                                               c_3 = "C"
+                                             }
+                                             else
+                                             {
+                                               c_3="NC"
+                                             }
+                                             if (val_4<=parseFloat(spec_4))
+                                             {
+                                               c_4 = "C"
+                                             }
+                                             else
+                                             {
+                                               c_4="NC"
+                                             }
+                                           }
+
+                                      else{
+
+                                        if (val_2<=parseFloat(spec_2))
+                                             {
+                                               c_2 = "C"
+                                             }
+                                             else
+                                             {
+                                               c_2="NC"
+                                             }
+
+                                             if (val_3<=parseFloat(spec_3))
+                                             {
+                                               c_3 = "C"
+                                             }
+                                             else
+                                             {
+                                               c_3="NC"
+                                             }
+                                             if (val_4>=parseFloat(spec_4))
+                                             {
+                                               c_4 = "C"
+                                             }
+                                             else
+                                             {
+                                               c_4="NC"
+                                             }
+
+                                      }
+
+                                           console.log("C")
+                                           console.log(c_1)
+                                           console.log(c_2)
+                                           console.log(c_3)
+                                           console.log(c_4)
+                                           $('#c1').attr('value', c_1)
+                                           $('#c2').attr('value', c_2)
+                                           $('#v1').attr('value', val_1)
+                                           $('#c3').attr('value', c_3)
+                                           $('#c4').attr('value', c_4)
+                                        });
+
+
+
+                            //  $("#tab_logic").find('tr').each(function()
+                            //  {
+                            //               // if($(this).find('input.chk').is(':checked'))
+                            //               {
+                            //                 console.log(this)
+                            //                 var val1 = $(this).find("td:eq(0) input[type='text']").html();
+                            //                 // var val2 = $(this).find('td:eq(2)').html();
+                            //                 console.log(val1)
+                            //                 // alert(val1);
+                            //                 // alert(val2);
+                            //               }
+                            //           });
+                                        // var data1 = $(this).find("td:eq(0) input[type='text']").val();
+                                        // var data2 = $(this).find("td:eq(1) input[type='text']").val();
+                                        // console.log(data1)
+                                        // console.log("p")
+                                   
+
+              
+
+              socket.on('Predict', function(data) {
+                    console.log("iii")
+                    val_1 = data.typ;
+                    val_2 = data.val2;
+              
+                    val_3 =data.val3;
+                    val_4 = data.val4;
+                    fid = data.fid;
+                    console.log(val_1);
+                    console.log(val_2);
+                    console.log(val_3);
+                    console.log(val_4);
+                    console.log(fid);
+
+                    // l=document.getElementById("spec-power").innerHTML ;
+                    // console.log(l)
+                    // = val_1;
+                    // document.getElementById("v-t").innerHTML = val_2;
+                    // document.getElementById("s-i").innerHTML = val_3;
+                    // document.getElementById("v-i").innerHTML = val_4;
+
+                    $('#v1').attr('value', val_1)
+                    $('#v2').attr('value', val_2)
+
+                    $('#v3').attr('value', val_3)
+                   $('#v4').attr('value', val_4)
+                   var t= "File ID - "+fid
+                   console.log(t)
+                   console.log("t")
+                   $('#fid').attr('value', t)
+                  
+
+                 
+                  });
+
+            // socket.on('processfail',function(data)
+            //   {
+            //     console.log("pppp")
+            //     sweetAlert({
+            //                 title: "Oops!",
+            //                 text: "Error Occured ... Returning to Manual Mode",
+            //                 type: "error",
+            //                  timer: 4000,
+            //                  dangerMode: true
+            //                 });
+
+            //     u = data.image_u;
+            //     // 
+            //     $("#select1").val("1");
+            //     optionValue=1;
+
+            //   });
+            });
+</script>
+
+
+
+
+ 
+
+
+
+
+
+  <h4>STEP1 : Choose input file and click on "Submit"</h4>
+  <br>
+  
+<form action = "http://127.0.0.1:5000/uploader" method = "POST" enctype = "multipart/form-data">
+   <input type = "file" name = "file" />
+   <br>
+
+   
+   <input type = "submit" class='btn btn-default' />
+   <!-- <button type='button'>submit</button>  -->
+</form>
+<br>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <h6>{{ message }}</h6>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<br>
+
+
+
+
+    <h4 >STEP2 : Click on "Evaluate" to know the results</h4>
+    <br>
+        <form>
+
+            <span class='btn btn-default' onclick="set()">Evaluate</span>
+            <!-- <button class='btn btn-default' id ="eval">Evaluate</button> -->
+        </form>
+
+
+
+</div>
+
+<br>
+
+
+<!-- <div id="table-parent"> 
+
+
+
+
+  <table class="table table-striped" align = "center">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+
+
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 table-responsive">
+    <table class="table table-bordered table-hover table-sortable" id="tab_logic">
+      <thead>
+        <tr>
+            <th colspan="4" class="text-center" id="id">
+                <input type="text" id="fid" name="fid" placeholder='PleaseEnter' value = "File ID" readonly="readonly" class="form-control"/>
+              </th>
+        </tr>
+        <tr >
+          
+          <th class="text-center">
+            Parameter
+          </th>
+          <th class="text-center">
+            Value
+          </th>
+            <th class="text-center">
+            Spec
+          </th>
+          <th class="text-center">
+            C/NC
+
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr id='addr0' data-id="0" >
+          <td data-name="name">
+              HLINK POWER STATE
+          </td>
+          <td data-name="mail" id="state">
+              <input type="text" id="v1" name="v1" placeholder='PleaseEnter' value = "-" readonly="readonly" class="form-control"/>
+              <!-- <script type="text/javascript">  document.write(var_1)</script> -->
+              
+          </td>
+          <td data-name="desc" id = "spe-power" class= "keyvalue">
+              <input type="text"  name='name1'  placeholder='PleaseEnter' class="form-control"/>
+          </td>
+            <td data-name="sel" id="1-C/NC" >
+              <input type="text" id="c1" name="c1" placeholder='PleaseEnter' value = "-" readonly="readonly" class="form-control"/>
+          </td>
+                      
+        </tr>
+
+
+        <!--  -->
+
+        <tr id='addr0' data-id="0" >
+            <td data-name="name" id = "r/f"> 
+                VPRIM CURRENT RISE/FALL TIME
+            </td>
+            <td data-name="mail" id="v-t">
+                <input type="number" step="any" id="v2" name="v2" placeholder='PleaseEnter' value =0.0  readonly="readonly" class="form-control"/>
+            </td>
+            <td data-name="desc" id="spe-r/f"  class= "keyvalue">
+                <input type="number" step="any" name='name2'  placeholder='PleaseEnter' class="form-control"/>
+            </td>
+              <td data-name="sel" id="2-C/NC">
+                <input type="text" id="c2" name="c2" placeholder='PleaseEnter' value = "-" readonly="readonly" class="form-control"/>
+            </td>
+                        
+          </tr>
+          <!-- 
+
+           -->
+
+
+           <tr id='addr0' data-id="0" >
+              <td data-name="name">
+                  VPRIM CURRENT STABILIZED
+              </td>
+              <td data-name="mail" id="s-i">
+                  <input type="number" step="any" id="v3" name="v3" placeholder='PleaseEnter' value = 0.0 readonly="readonly" class="form-control"/>
+              </td>
+              <td data-name="desc" id="spec-stab"  class= "keyvalue">
+                  <input type="number" step="any" name='name3'  placeholder='PleaseEnter' class="form-control"/>
+              </td>
+                <td data-name="sel" id="3-C/NC">
+                  <input type="text" id="c3" name="c3" placeholder='PleaseEnter' value = "-" readonly="readonly" class="form-control"/>
+              </td>
+                          
+            </tr>
+
+            <!--  -->
+
+            <tr id='addr0' data-id="0" >
+                <td data-name="name" id = "m/m">
+                    VPRIM CURRENT MAX/MIN
+                </td>
+                <td data-name="mail" id = "v-i">
+                    <input type="number" step="any" id="v4" name="v4" placeholder='PleaseEnter' value = 0.0 readonly="readonly" class="form-control"/>
+                    
+                </td>
+                <td data-name="desc" id = "spec-m/m"  class= "keyvalue">
+                    <input type="number" step="any" name='name1'  placeholder='PleaseEnter' class="form-control"/>
+                </td>
+                  <td data-name="sel" id="4-C/NC">
+                    <input type="text" id="c4" name="c4" placeholder='PleaseEnter' value = "-" readonly="readonly" class="form-control"/>
+                </td>
+                            
+              </tr>
+
+              <!--  -->
+      </tbody>
+    </table>
+  </div>
+</div>
+<a id="pred" class="btn btn-primary float-right">Predict</a>
+</div>
+
+
+{% endblock %}
+<!-- <br>
+</body> -->
+
