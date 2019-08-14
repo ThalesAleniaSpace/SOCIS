@@ -715,8 +715,8 @@ for i in range(len(y_train_c)):
 
 from keras.backend import manual_variable_initialization 
 manual_variable_initialization(True)
-model.save ("./app/MODEL/my_model_OFF.h5")
-model1.save ("./app/MODEL/my_model_1_OFF.h5")
+model.save ("./app/MODEL/my_model_ON.h5")
+model1.save ("./app/MODEL/my_model_1_ON.h5")
 
 
 
@@ -724,8 +724,8 @@ model1.save ("./app/MODEL/my_model_1_OFF.h5")
 
 # print(model.get_weights())
 
-print (model1.get_weights())
-model1.save_weights("on_1.h5")
+# print (model1.get_weights())
+# model1.save_weights("on_1.h5")
 
 
 # In[39]:
