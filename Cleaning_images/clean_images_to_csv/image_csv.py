@@ -7,7 +7,7 @@ col = '_file_'
 
 
 for index, row in df.iterrows():
-    rep = str("" + str(row["dir"]) + "_"+str(row["id"])+".BMP")
+    rep = str("" + str(row["dir"]) + "_"+str(row["id"])+".bmp")
     print(rep)
     row[col]  = rep
     df.at[index,col] = rep
