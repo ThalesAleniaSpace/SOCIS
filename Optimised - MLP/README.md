@@ -10,7 +10,7 @@ The main goal is to train, configure and deploy a perceptron to work on the outp
 
 ---
 
-##### Sprints
+##### Folder Details
 
 For details regarding the problem statement, methodology and results refer - **Perceptron_usermanual.pdf**
  
