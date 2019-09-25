@@ -15,5 +15,5 @@ For details regarding the deployment of the REST API using Docker image - **REST
 ![Alt text](GUI_image.png?raw=true " GUI of the Perceptron")
  
 
-![What is this](GUI_image.png)
+<!-- ![What is this](GUI_image.png) -->
 ---
