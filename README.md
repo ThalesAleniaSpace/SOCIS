@@ -40,12 +40,29 @@ The sprints will be updated when the actual sprint is finished.
     * Trade off
     * Optimize topology and parameters
 
-* **Sprint 3** -> Actual sprint
+* Sprint 3:
+  * Create docker image with the perceptron and the REST API
+  * Docker image deployed in Thales environment
+  * Analyze input data to convolutional network (graphs)
+  * Study different convolutional models
+  * Trade off of the study made
 
 * Sprint 4
+  * First Implementation of CNN
+    * Download the CNN model selected in the analysis phase
+    * Train the network with a set of images
+    * Analyse the time the network takes in training and the training results
+  * Install CNN in VPU
 
 * Sprint 5
+  * Install CNN in VPU
+    * Download a big convolutional model (e.g. RestNet50) and install in the VPU
+    * Execute the CNN and compare the results of executing the CNN with or without VPU. Generate a report
+    * Test the VPU in MacOS and CentOS  and Windows operative systems
 
 * Sprint 6
+  * Write user manual of perceptron
+  * Write user manual of CNN
+  * Write user manual of VPU
 
 ---
