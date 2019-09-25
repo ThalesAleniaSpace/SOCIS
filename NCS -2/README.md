@@ -5,7 +5,7 @@
 
 ##### Objective
 
-To deploy a CNN and analyse thw working of the Intel Neural Compute Stick 2 - Movidius NCS2 
+To deploy a CNN and analyse the working of the Intel Neural Compute Stick 2 - Movidius NCS2 
 ---
 
 ##### Folder Details
