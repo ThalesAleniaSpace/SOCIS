@@ -12,6 +12,6 @@ To create docker image and a GUI with the perceptron and the REST API
 
 For details regarding the deployment of the REST API using Docker image - **REST API_Readme.pdf**
 
-![Alt text](GUI_image.jpg?raw=true " GUI of the Perceptron")
+![Alt text](GUI_image.png?raw=true " GUI of the Perceptron")
  
 ---
