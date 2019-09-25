@@ -10,6 +10,6 @@ To deploy a CNN and analyse thw working of the Intel Neural Compute Stick 2 - Mo
 
 ##### Folder Details
 
-For details regarding the problem statement, methodology and results refer - **Setting up of NCS2 on Ubuntu and Windows.pdf**
+For details regarding the setting up and deployment in the VPU - **Setting up of NCS2 on Ubuntu and Windows.pdf**
  
 ---
