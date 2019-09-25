@@ -12,7 +12,7 @@ The main goal is to clean the images for the Convolution Neural Networks and to 
 
 ##### Folder Details
 
-For details regarding the problem statement, methodology and results refer - **Perceptron_usermanual.pdf**
+
  
   * **clean_images.py** - python code to clean the images by removing the borders, unwanted axis and logos from the images.
   * **clean_images_to_csv** - Extract the data into csv files.

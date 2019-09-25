@@ -5,19 +5,21 @@
 
 ##### Objective
 
-The main goal is to train, configure and deploy a perceptron to work on the outputs of the test results generated from Thales Alenia Space España test benches during equipment acceptance campaigns by outputting 4 different values namely current_stabilised_value (mA), current_max/min_value (mA), power_state, current_rise/fall_time_spec (mS).
+Extract the data to csv files.
 
 
 ---
 
 ##### Folder Details
 
-For details regarding the problem statement, methodology and results refer - **Perceptron_usermanual.pdf**
  
 
-  * **perpec_OFF.py/ perpec_ON.py** - python implementation of the perceptron.
-  * **MODEL** - Contains all the stored weights and the model architecture.
-  * **Results** - Contains all the output graphs.
+  * **dataprep_CNN.ipynb** - Extract the data into off_clean.csv, on_clean.csv.
+  * **image_csv.py** - Extract the data into image_csv.csv
+  * **train_off.csv** - Removed null values from off_clean.csv
+  * **train.csv** - Removed null values from on_clean.csv
+  * **Original Dataset** - https://drive.google.com/drive/folders/1JfbvB38ur8TGXT44rE5ORcVB6FY9p3dj?usp=sharing
+  * **Final Dataset** - https://drive.google.com/drive/folders/1sDtQNu2tPMM_iuYz_6RinmvRO3MhxM9b?usp=sharing
   * **points.csv** - https://drive.google.com/file/d/1jkAdxRrEnQVYCbVf6pxbKaqiSqvI1BQD/view?usp=sharing
   * **values.csv** - https://drive.google.com/file/d/1N1TAl4WsGxjJYgzocwjZxs9too_eIrkK/view?usp=sharing
     
