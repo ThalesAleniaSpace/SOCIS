@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # In[1]:
@@ -30,6 +30,12 @@ import tensorflow as tf
 from sklearn.feature_selection import VarianceThreshold
 # from keras.backend import manual_variable_initialization 
 # # manual_variable_initialization(True)
+
+
+# In[ ]:
+
+
+
 
 
 # In[3]:
@@ -346,7 +352,7 @@ X_new.shape
 
 
 import pickle
-pickle.dump(factor_fit, open( "./app/MODEL/factor_fit_off.pkl", "wb" ) )
+pickle.dump(factor_fit, open( "./app/MODEL/factor_fit_on.pkl", "wb" ) )
 
 
 # In[22]:
@@ -513,10 +519,11 @@ print(Y1[0,2], Y_new[0,0])
 # print(Y_new[:,0])
 g = r2_score(Y1[:,2], Y_new[:,0])  
 g1 = r2_score(Y1[:,3], Y_new[:,1]) 
-print(g,g1)
+print(g,"r2 of stabilised")
+print(g1,"r2 of max")
 Y1[:,2]= Y_new[:,0]
 Y1[:,3]= Y_new[:,1]
-print(Y1[0,2], Y_new[0,0])
+# print(Y1[0,2], Y_new[0,0])
 
 
 # In[29]:
@@ -595,8 +602,8 @@ scaler_rob_y = MinMaxScaler().fit(y_train_c)
 
 
 import pickle
-pickle.dump(scaler_rob_x, open( "./app/MODEL/scaler_rob_x_1_OFF.pkl", "wb" ) )
-pickle.dump(scaler_rob_y, open( "./app/MODEL/scaler_rob_y_1_OFF.pkl", "wb" ) )
+pickle.dump(scaler_rob_x, open( "./app/MODEL/scaler_rob_x_1_ON.pkl", "wb" ) )
+pickle.dump(scaler_rob_y, open( "./app/MODEL/scaler_rob_y_1_ON.pkl", "wb" ) )
 X_rob_train_c = scaler_rob_x.transform(X_train_c)
 Y_rob_train_c = scaler_rob_y.transform(y_train_c)
 
@@ -614,11 +621,17 @@ print(X_new1.shape)
 # print((X_rob_train[:,0:10000].shape))
 
 
+# In[ ]:
+
+
+
+
+
 # In[33]:
 
 
 import pickle
-pickle.dump(factor_fit, open( "./app/MODEL/factor_fit_1_OFF.pkl", "wb" ) )
+pickle.dump(factor_fit, open( "./app/MODEL/factor_fit_1_ON.pkl", "wb" ) )
 
 
 # In[34]:
@@ -660,7 +673,7 @@ model1 = baseline_model_31()
 
 # print(X_new.shape)
 # print(y_train.shape)
-history = model1.fit(X_new1,  Y_rob_train_c, epochs=400, batch_size=5,  verbose=1, validation_split=0.0)
+history_1 = model1.fit(X_new1,  Y_rob_train_c, epochs=400, batch_size=5,  verbose=1, validation_split=0.0)
 
 
 # In[36]:
@@ -673,21 +686,24 @@ import math
 pred_c = model1.predict((X_new1))
 print(pred_c.shape)
 
-mse = (mean_squared_error(Y_rob_train,pred_c))
+mse = (mean_squared_error(Y_rob_train_c,pred_c))
 
 print(mse)
-visualize_learning_curve(history)
+visualize_learning_curve(history_1)
 
 
 # In[37]:
 
 
+Final = []
+# print(y_train_c)
 for i in range(len(y_train_c)):
   
-    print(y_train_c[i],"ytest[i]")
+#     print(y_train_c[i],"ytest[i]")
 #     print(X_train_c[i])
     
     X_c = (scaler_rob_x.transform(X_train_c[i].reshape(1, -1)))
+    k = []
 
 #     print(X_c)
     I = factor_fit.transform(X_c[:,0:10000])
@@ -704,9 +720,17 @@ for i in range(len(y_train_c)):
 #     print(final,"final")                               
     final[0][0]= np.abs(np.round(final[0][0]))
                                           
-    print(final[0],"final")
+#     print(final[0],"final")
+    k.append(final[0][0])
+    k.append(final[0][1])
+    Final.append(k)
 
     h = abs(final[0]-y_train_c[i])
+Final_np = np.asarray(Final, dtype=np.float32)    
+# print(Final)
+print(y_train_c[100,1], Final_np[100,1])
+r2_time = r2_score(y_train_c[:,1], Final_np[:,1]) 
+print(r2_time,"stabilization time")
 
 
 # In[38]:
@@ -725,7 +749,7 @@ model1.save ("./app/MODEL/my_model_1_ON.h5")
 # print(model.get_weights())
 
 # print (model1.get_weights())
-# model1.save_weights("on_1.h5")
+model1.save_weights("on_1.h5")
 
 
 # In[39]:
@@ -745,4 +769,22 @@ model1.save ("./app/MODEL/my_model_1_ON.h5")
 # mse = (mean_squared_error(Y_rob_train,pred))
 
 # print(mse)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 

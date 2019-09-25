@@ -1,0 +1,5 @@
+Attribute,Actuall,Obtained,SPEC,Actuall C/NC,Obtained C/NC
+Power State,OFF,OFF,OFF,C,C
+Current Rise/Fall time,7.955,4.180389404296875,10.0,C,C
+Current Stabilised Value,40.2,45.51082229614258,0.99,NC,NC
+Current MIN/MAX Value,-34.2891,-23.024188995361328,-100.0,C,C

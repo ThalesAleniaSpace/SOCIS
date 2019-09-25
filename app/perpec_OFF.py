@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # In[1]:
@@ -30,6 +30,12 @@ import tensorflow as tf
 from sklearn.feature_selection import VarianceThreshold
 # from keras.backend import manual_variable_initialization 
 # # manual_variable_initialization(True)
+
+
+# In[ ]:
+
+
+
 
 
 # In[3]:
@@ -310,22 +316,22 @@ X_train_t = X_train.transpose()
 # print(X_train,"after")
 # print(y_train.shape,"after")
 
-scaler_rob_x = MinMaxScaler().fit(X_train_t)
+scaler_min_x = MinMaxScaler().fit(X_train_t)
 # scaler_rob_y = RobustScaler().fit(y_train_t)
 
 
-X_rob_train = scaler_rob_x.transform(X_train_t)
+X_min_train = scaler_min_x.transform(X_train_t)
 # Y_rob_train = scaler_rob_x.transform(y_train_t)
 
-X_rob_train = X_rob_train.transpose()
+X_min_train = X_min_train.transpose()
 # Y_rob_train = Y_rob_train.transpose()
 
-print(X_rob_train.shape)
+# print(X_rob_train.shape)
 # print(Y_rob_train.shape)
 # print(Y_rob_train)
 
-Y_rob_train = X_rob_train[:,10000:10002]
-X_rob_train = X_rob_train[:,0:10000]
+Y_min_train = X_min_train[:,10000:10002]
+X_min_train = X_min_train[:,0:10000]
 # print(Y_rob_train)
 # print(X_rob_train)
 
@@ -336,8 +342,8 @@ X_rob_train = X_rob_train[:,0:10000]
 from sklearn.decomposition import FactorAnalysis
 
 transformer = FactorAnalysis(n_components=30, random_state=0)
-factor_fit = transformer.fit(X_rob_train)
-X_new = factor_fit.transform(X_rob_train)
+factor_fit = transformer.fit(X_min_train)
+X_new = factor_fit.transform(X_min_train)
 X_new.shape
 
 
@@ -389,7 +395,7 @@ print (model.get_weights())
 
 print(X_new.shape)
 print(y_train.shape)
-history = model.fit(X_new,  Y_rob_train, epochs=200, batch_size=5,  verbose=1, validation_split=0.0)
+history = model.fit(X_new,  Y_min_train, epochs=200, batch_size=5,  verbose=1, validation_split=0.0)
 
 
 # In[24]:
@@ -449,7 +455,7 @@ import math
 pred = model.predict((X_new))
 # print(pred)
 
-mse = (mean_squared_error(Y_rob_train,pred))
+mse = (mean_squared_error(Y_min_train,pred))
 
 print(mse)
 visualize_learning_curve(history)
@@ -516,7 +522,7 @@ g1 = r2_score(Y1[:,3], Y_new[:,1])
 print(g,g1)
 Y1[:,2]= Y_new[:,0]
 Y1[:,3]= Y_new[:,1]
-print(Y1[0,2], Y_new[0,0])
+# print(Y1[0,2], Y_new[0,0])
 
 
 # In[29]:
@@ -614,6 +620,12 @@ print(X_new1.shape)
 # print((X_rob_train[:,0:10000].shape))
 
 
+# In[ ]:
+
+
+
+
+
 # In[33]:
 
 
@@ -660,10 +672,10 @@ model1 = baseline_model_31()
 
 # print(X_new.shape)
 # print(y_train.shape)
-history = model1.fit(X_new1,  Y_rob_train_c, epochs=400, batch_size=5,  verbose=1, validation_split=0.0)
+history_1 = model1.fit(X_new1,  Y_rob_train_c, epochs=400, batch_size=5,  verbose=1, validation_split=0.0)
 
 
-# In[36]:
+# In[42]:
 
 
 from sklearn.metrics import mean_squared_error,mean_absolute_error
@@ -673,15 +685,16 @@ import math
 pred_c = model1.predict((X_new1))
 print(pred_c.shape)
 
-mse = (mean_squared_error(Y_rob_train,pred_c))
+mse = (mean_squared_error(Y_rob_train_c,pred_c))
 
 print(mse)
-visualize_learning_curve(history)
+visualize_learning_curve(history_1)
 
 
-# In[37]:
+# In[38]:
 
 
+Final = []
 for i in range(len(y_train_c)):
   
     print(y_train_c[i],"ytest[i]")
@@ -703,13 +716,25 @@ for i in range(len(y_train_c)):
     final = scaler_rob_y.inverse_transform(pred_c.reshape(1, -1))
 #     print(final,"final")                               
     final[0][0]= np.abs(np.round(final[0][0]))
+    #     print(final[0],"final")
+    k=[]
+    k.append(final[0][0])
+    k.append(final[0][1])
+    Final.append(k)
+
+
                                           
     print(final[0],"final")
 
     h = abs(final[0]-y_train_c[i])
+Final_np = np.asarray(Final, dtype=np.float32)    
+# print(Final)
+print(y_train_c[100,1], Final_np[100,1])
+r2_time = r2_score(y_train_c[:,1], Final_np[:,1]) 
+print(r2_time,"stabilization time")
 
 
-# In[43]:
+# In[39]:
 
 
 
@@ -728,7 +753,7 @@ print (model1.get_weights())
 model1.save_weights("on_1.h5")
 
 
-# In[39]:
+# In[40]:
 
 
 # from keras.models import load_model
@@ -736,7 +761,7 @@ model1.save_weights("on_1.h5")
 # new_model_1 = load_model('my_model_1_ON.h5')
 
 
-# In[40]:
+# In[41]:
 
 
 # pred = new_model_1.predict((X_new1))
@@ -745,4 +770,58 @@ model1.save_weights("on_1.h5")
 # mse = (mean_squared_error(Y_rob_train,pred))
 
 # print(mse)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
