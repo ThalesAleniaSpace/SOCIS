@@ -95,8 +95,7 @@ def cleanimage(filepath,sno, dir1):
     # filetrace_end = "------------------------------------------------------------------------------"
 
 
-#     filename_index = 4
-#     filedate_index = 5
+
     filelabel_index = 54
     filemouse_index = 88
     filex_index = 43
@@ -148,12 +147,12 @@ for i in range(len(all_files_path)):
         filepath = all_files_path[i][j]
         filepath = filepath
         fo = open(filepath, "r")
-        print(fo,"g")
-        # break
+        
+       
 
         filename = os.path.basename(fo.name)
         test = "HEGSE"
-        # print(filename)
+      
         if filename.find(test) == -1:
             print(filename)
             sno = sno+1

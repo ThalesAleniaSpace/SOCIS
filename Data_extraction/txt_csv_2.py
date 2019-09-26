@@ -127,8 +127,7 @@ def  getvalues(sno,final_filetype,lines,powerstate_index,dir1,final_index):
 
 
            
-    # print(final_power_val,"-",final_power_spec,"-",final_power_nc)
-    # currenttime val,spec,c/nc
+   
     currenttime_index = powerstate_index + 4
     temp_x = lines[currenttime_index].strip()
     x = temp_x.find("=")
@@ -166,10 +165,9 @@ def  getvalues(sno,final_filetype,lines,powerstate_index,dir1,final_index):
                 if (ind+i)>=final_index:
                     final_currenttime_nc=''
                 else:
-                    # k2 = temp_str.rfind("mS")
+                    
                     final_currenttime_nc = temp_str[k1+1:].strip()
-    # print(final_currenttime_val,"-",final_currenttime_spec,"-",final_currenttime_nc)
-    # curretstable val,spec,c/nc
+
     currentstable_index = currenttime_index + 4
 
     temp_x = lines[currentstable_index].strip()
@@ -217,8 +215,7 @@ def  getvalues(sno,final_filetype,lines,powerstate_index,dir1,final_index):
                     final_currentstable_nc = temp_str[k1+1:].strip()
 
             
-    # print(final_currentstable_val,"-",final_currentstable_spec,"-",final_currentstable_nc)
-    # curretminmax val,spec,c/nc
+
     currentminmax_index = currentstable_index + 4
 
 
@@ -260,16 +257,13 @@ def  getvalues(sno,final_filetype,lines,powerstate_index,dir1,final_index):
             if (i==2):
 
                 if (ind+i)>=final_index:
-                    # print(ind+i)
-                    # print(final_index)
+                   
                     final_currentminmax_nc =''
                 else:
-                    # print(temp_str)
+              
                     final_currentminmax_nc = temp_str[k1+1:].strip()
-                    # print(final_currentminmax_nc)
+                  
 
-                
-    # print(final_currentminmax_val,"-",final_currentminmax_spec,"-",final_currentminmax_nc)
 
     return_list = []
     return_list.append(sno)
@@ -290,7 +284,7 @@ def  getvalues(sno,final_filetype,lines,powerstate_index,dir1,final_index):
     return_list.append((final_currentstable_nc))
     return_list.append((final_currentminmax_nc))
 
-    # print(return_list,"return_list")
+  
     return return_list,sno
 
 
@@ -323,16 +317,15 @@ def getpoints(filepath,sno,dir1):
        
         
     filetraceend_index =  len(lines)-1
-    # if(lines[filetraceend_index-8].strip()==)
+  
     final_index = filetraceend_index - 6
     
     temp_str = lines[index].strip()
     k1 = temp_str.rfind("=")
-    
-    # k2 = temp_str.find(".sfg")
+
 
     final_filetype = temp_str[k1+1:]
-    # print(final_filetype)
+
     print(dir1)
 
     power_state = "HILINK POWER STATE"
@@ -348,11 +341,6 @@ def getpoints(filepath,sno,dir1):
     fo.close()
     return return_list1,sno
 
-    # with open('your_file.txt', 'w') as f:
-    #     for item in range(len(lines)):
-    #         f.write("%s" % item)
-    #         f.write("%s\n" % lines[item])
-    # return return_list
 ###################################################################################    
 # call the function
 
@@ -371,10 +359,9 @@ for i in range(len(all_files_path)):
         if filename.find(test) != -1:
             
             return_list1,sno = getpoints(filepath,sno,all_tests[i])
-            # print(return_list1)
-            # csv_list.append(return_list)
+       
             csv_list = csv_list + return_list1
-            # print(csv_list)
+           
         
     
 
@@ -382,17 +369,7 @@ with open('values.csv', 'a') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerows(csv_list)
 
-    
-        
-    
-        
-        
 
-# # with open('your_file_1.txt', 'w') as f:
-# #         for item in range(len(csv_list[0])):
-# #             # f.write("%s" % item)
-# #             f.write("%s\n" % csv_list[item])
-    
 
     
     

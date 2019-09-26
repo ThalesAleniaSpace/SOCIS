@@ -29,25 +29,22 @@ for i in range(q):
   l = len(k[i])
   if(l==1):
    
-#     print(k[i])
+
     k[i]= "00"+str(k[i])
  
-#     print(k[i])
-#     print("----")
+
+
   if(l==2):
-#     print(k[i])
+
     k[i]="0"+str(k[i])
     
-#     print(k[i])
-#     print("----")
+
   
   
 leng = len(k)
-# print(leng)
-# print(type(k))
+
 data_v["dir"] = k
-# print(k)
-# print(data_v["dir"])
+
 data_v["id"] = data_v["id"].map(str) +"_"+k
 print(data_v["id"])
 
@@ -62,13 +59,13 @@ for i in range(len(arr_v)):
     s = arr_v[i][1]
     s = str(s)
     
-#     print(type(st))
+
     if s.find("N") == -1:
         OFF_list.append(arr_v[i])
     
     else:
         ON_list.append(arr_v[i])
-# calculating for ON
+
 print(len(ON_list),"ON")
 print(len(OFF_list),"OFF")
 arr_on_v = np.array(ON_list)

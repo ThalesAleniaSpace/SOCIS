@@ -60,8 +60,7 @@ def load_train():
             img = cv2.imread(image_path, cv2.IMREAD_COLOR)
             img =  img[83:441, 30:510]
             img = cv2.resize(img, (image_size, image_size) ).astype('uint8')
-#             img = cv2.resize(cv2.imread(image_path, cv2.IMREAD_COLOR), (image_size, image_size) ).astype('uint8')
-#         img = img.transpose((2,0,1))
+
             X_train.append(img)
             y_train.append( [ float(row['current_stabilised_value (mA)']) ])
 #             print(y_train)
@@ -74,11 +73,7 @@ def load_train():
 
         except Exception as e:
             print(str(e))
-#         image_path = os.path.join('newDataset', str((row['Path'])) )
-#         img = cv2.resize(cv2.imread(image_path, cv2.IMREAD_COLOR), (image_size, image_size) ).astype('uint8')
-# #         img = img.transpose((2,0,1))
-#         X_train.append(img)
-#         y_train.append( [ float(row['current_max/min_value (mA)']) ])
+
 
     return X_train, y_train
 
@@ -226,15 +221,11 @@ def train_model(batch_size = 8, nb_epoch = 2):
     train_data, train_target = read_and_normalize_train_data()
     train_data = train_data[0:num_samples,:,:,:]
     train_target = train_target[0:num_samples]
-#     print(train_target)
+
     train_target =  (train_target + 200 - min1)/(max1 - min1)
-#     print(train_target)
+
 
     X_train, X_valid, y_train, y_valid = train_test_split(train_data, train_target, test_size=cv_size, random_state=56741)
-#     Y_train =( y_train - min1 )/(max1 - min1)
-#     scaler_rob_y = MinMaxScaler().fit(y_train) 
-#     Y_train = scaler_rob_y.transform(y_train)
-#     Y_valid = scaler_rob_y.transform(y_valid)
 
 
 
@@ -243,19 +234,16 @@ def train_model(batch_size = 8, nb_epoch = 2):
 
     predictions_valid = (model.predict(X_valid, batch_size=8, verbose=1))
 
-#     prt(y_valid,"y")
+
     y1 =  (( y_valid.flatten() ) * ( max1 - min1)) + min1
-#     print(predictions_valid,"p")
-#     predictions_valid = scaler_rob_y.inverse_transform(predictions_valid.reshape(-1, 1))
+
     y2 = ((predictions_valid.flatten() ) * ( max1 - min1)) + min1
     print(y1,"y1")
     print(y2,"y2")
     from sklearn.metrics import r2_score
     r2 = r2_score(y_valid, predictions_valid) 
     print(r2,"r2")
-#     compare = pd.DataFrame(data={'original':y_valid.reshape((cv_size,)),
-#              'prediction':predictions_valid.reshape((cv_size,))})
-#     compare.to_csv('compare.csv')
+
 
     return model, history
 
@@ -271,29 +259,4 @@ plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
 plt.show()
 
-# num_samples = 370
-# cv_size = 0.3
-
-# train_data, train_target = read_and_normalize_train_data()
-# train_data = train_data[0:num_samples,:,:,:]
-# train_target = train_target[0:num_samples]
-# #     print(train_target)
-# train_target =  (train_target - min1)/(max1 - min1)
-# #     print(train_target)
-
-# X_train, X_valid, y_train, y_valid = train_test_split(train_data, train_target, test_size=cv_size, random_state=56741)
-# #     Y_train =( y_train - min1 )/(max1 - min1)
-
-# predictions_valid = (model1.predict(X_valid, batch_size=8, verbose=1))
-
-# #     print(y_valid,"y")
-# y1 = ( y_valid.flatten() * ( max1 - min1)) + min1
-# #     print(predictions_valid,"p")
-# #     predictions_valid = scaler_rob_y.inverse_transform(predictions_valid.reshape(-1, 1))
-# y2 = (predictions_valid.flatten() * ( max1 - min1)) + min1
-# print(y1,"y1")
-# print(y2,"y2")
-# from sklearn.metrics import r2_score
-# r2 = r2_score(y_valid, predictions_valid) 
-# print(r2,"r2")
 

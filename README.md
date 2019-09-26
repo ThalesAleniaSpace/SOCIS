@@ -64,5 +64,7 @@ The sprints will be updated when the actual sprint is finished.
   * Write user manual of perceptron
   * Write user manual of CNN
   * Write user manual of VPU
+  * Upload final source code and documentation to TAS-E Github for SOCIS project
+  * Hold final DEMO meeting with TAS-E CTO and SW&Ground lines including AI specialists
 
 ---
