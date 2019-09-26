@@ -56,10 +56,7 @@ def Evaluate():
         labels[0].append('x'+ str(i+1))
         labels[0].append('y'+ str(i+1))
 
-#list of labels
 
-# print(labels)
-# labels[0] = labels[0] + ['a', 'a', 'a', 'a', 'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',]
     csvData = labels
     
     with open('input/points.csv', 'w') as csvFile:
@@ -69,8 +66,7 @@ def Evaluate():
     fo = open(os.path.join(app.config['UPLOAD_FOLDER'], "input.txt"), "r")
 
     filename = os.path.basename(fo.name)
-    print(filename,"filename")
-    print(filepath,"filepath")
+   
     test = "HEGSE"
     csv_list = []
     if filename.find(test) == -1:
@@ -84,12 +80,12 @@ def Evaluate():
     getvalues=[0,0,0,0]
     pathtocsv = os.path.join(app.config['UPLOAD_FOLDER'], "points.csv")
     pathtoMODEL = os.path.join(app.config['MODEL_FOLDER'], "")
-    print(pathtocsv,"csv path")
+  
     typ=""
     typ, data_x, scaler_rob_x, X, fid = data_pre(pathtocsv, pathtoMODEL)
-    print(fid,"fid")
+ 
     getvalues= get_val(data_x, typ, scaler_rob_x, X,pathtoMODEL)
-    print(getvalues,"FINAL")
+  
     if(typ == "on"):
     
         k = "ON"
@@ -159,17 +155,10 @@ if __name__ == '__main__':
 
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], input_output[0])
         
-
-
-
-
-        # print(input_output[0])
-
         with open(filepath,'r',errors="ignore") as f:
             with open(input_file, "w") as f1:
                 for line in f:
                     
-                    # print(line)
                     f1.write(line)
         
         #
@@ -191,8 +180,7 @@ if __name__ == '__main__':
         fo = open(os.path.join(app.config['UPLOAD_FOLDER'], "input.txt"), "r")
 
         filename = os.path.basename(fo.name)
-        print(filename,"filename")
-        print(filepath,"filepath")
+        
         test = "HEGSE"
         csv_list = []
         if filename.find(test) == -1:
@@ -206,12 +194,12 @@ if __name__ == '__main__':
         getvalues=[0,0,0,0]
         pathtocsv = os.path.join(app.config['UPLOAD_FOLDER'], "points.csv")
         pathtoMODEL = os.path.join(app.config['MODEL_FOLDER'], "")
-        print(pathtocsv,"csv path")
+        
         typ=""
         typ, data_x, scaler_rob_x, X, fid = data_pre(pathtocsv, pathtoMODEL)
-        print(fid,"fid")
+        
         getvalues= get_val(data_x, typ, scaler_rob_x, X,pathtoMODEL)
-        print(getvalues,"FINAL")
+        
         if(typ == "on"):
         
             k = "ON"
@@ -226,7 +214,7 @@ if __name__ == '__main__':
         val3 = float(getvalues[2])
         val4 = float(getvalues[3])
         fid = str(fid)
-        print(typ,val2,val3,val4,fid)
+       
 
         pathtovalues = os.path.join(app.config['UPLOAD_FOLDER'], "values.csv")
         
@@ -241,7 +229,7 @@ if __name__ == '__main__':
         for row in csv_file:
             
             if fid == str(row[1]):
-                print (row)
+                
                 actuall_power = str(row[4])
                 actuall_current_rise_fall_time_value=float(row[5])
                 actuall_current_stabilised_value=float(row[6])
@@ -333,6 +321,7 @@ if __name__ == '__main__':
 
                     writer = csv.writer(csvFile)
                     writer.writerows(csv_list)
+                print("----------------DONE-----------------")
 
                 break
         
